@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/HomeContainerFragment">
+
+    <fragment
+        android:id="@+id/HomeContainerFragment"
+        android:name="com.example.expensemanager.HomeContainerFragment"
+        android:label="HomeContainerFragment"
+        tools:layout="@layout/fragment_home_container" >
+        <action
+            android:id="@+id/action_HomeContainerFragment_to_addAccount"
+            app:destination="@id/addAccount" />
+        <action
+            android:id="@+id/action_HomeContainerFragment_to_addExpense"
+            app:destination="@id/addExpense" />
+        <action
+            android:id="@+id/action_HomeContainerFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAccount"
+        android:name="com.example.expensemanager.AddAccount"
+        android:label="fragment_add_account2"
+        tools:layout="@layout/fragment_add_account" >
+        <action
+            android:id="@+id/action_addAccount_to_selectCurrency"
+            app:destination="@id/selectCurrency" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectCurrency"
+        android:name="com.example.expensemanager.SelectCurrency"
+        android:label="fragment_select_currency2"
+        tools:layout="@layout/fragment_select_currency" >
+        <action
+            android:id="@+id/action_selectCurrency_to_initialAmount"
+            app:destination="@id/initialAmount" />
+    </fragment>
+    <fragment
+        android:id="@+id/initialAmount"
+        android:name="com.example.expensemanager.InitialAmount"
+        android:label="fragment_initial_amount2"
+        tools:layout="@layout/fragment_initial_amount" />
+    <fragment
+        android:id="@+id/addExpense"
+        android:name="com.example.expensemanager.AddExpense"
+        android:label="fragment_add_expense2"
+        tools:layout="@layout/fragment_add_expense" >
+        <action
+            android:id="@+id/action_addExpense_to_incomeFragment"
+            app:destination="@id/incomeFragment" />
+        <action
+            android:id="@+id/action_addExpense_to_expenseFragment"
+            app:destination="@id/expenseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/incomeFragment"
+        android:name="com.example.expensemanager.IncomeFragment"
+        android:label="fragment_income2"
+        tools:layout="@layout/fragment_income" />
+    <fragment
+        android:id="@+id/expenseFragment"
+        android:name="com.example.expensemanager.ExpenseFragment"
+        android:label="fragment_expense2"
+        tools:layout="@layout/fragment_expense" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.expensemanager.StatisticsFragment"
+        android:label="fragment_statistics2"
+        tools:layout="@layout/fragment_statistics" />
+
+</navigation>

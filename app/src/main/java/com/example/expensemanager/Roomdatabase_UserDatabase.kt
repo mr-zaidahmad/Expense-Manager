@@ -10,11 +10,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [RoomdatabaseUserdata::class], version = 1)
+@Database(entities = [
+    RoomdatabaseUserdata::class,
+    RoomdatabaseTransaction::class],
+    version = 2)
 abstract class Roomdatabase_UserDatabase : RoomDatabase()  {
 
 
     abstract fun userDAO() : RoomDatabaseDAO
+    abstract fun transactionDAO(): TransactionDAO
 
      companion object{
 
@@ -27,7 +31,9 @@ abstract class Roomdatabase_UserDatabase : RoomDatabase()  {
                   context,
                   Roomdatabase_UserDatabase::class.java,
                   "UserDB"
-              ).build()
+              )
+                  .fallbackToDestructiveMigration()
+                  .build()
              }
              return instance!!
          }

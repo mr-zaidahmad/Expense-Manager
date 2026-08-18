@@ -148,10 +148,17 @@ class HomeContainerFragment : Fragment() {
 
         val adapter = AccountAdapter(emptyList()) { account ->
 
-            binding.ToolbarAccount.text = account.name
+            // Save selected account
             preferences.edit()
                 .putString("SELECTED_ACCOUNT", account.name)
                 .apply()
+
+            // Change account name in toolbar
+            binding.ToolbarAccount.text = account.name
+
+            // Reload transaction screen so it loads
+            // the selected account's data
+            loadFragment(TranscationFragment())
 
             dialog.dismiss()
         }

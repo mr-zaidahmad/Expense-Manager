@@ -18,4 +18,8 @@ interface RoomDatabaseDAO {
   @Query("SELECT *FROM Account")
   fun getAllAccount(): LiveData<List<RoomdatabaseUserdata>>
 
+  @Query("SELECT * FROM Account WHERE name = :name LIMIT 1")
+  suspend fun getAccountByName(name: String): RoomdatabaseUserdata?
+
+
 }

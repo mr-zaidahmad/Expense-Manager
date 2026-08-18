@@ -25,32 +25,96 @@ class AddExpense : Fragment() {
 
         binding.AddexpenseBottomNav.itemIconTintList = null
 
-        if (savedInstanceState == null) {
+        var incomeFragment =
+            childFragmentManager.findFragmentByTag("INCOME") as? IncomeFragment
+
+        var expenseFragment =
+            childFragmentManager.findFragmentByTag("EXPENSE") as? ExpenseFragment
+
+
+        if (incomeFragment == null) {
+            incomeFragment = IncomeFragment()
+
             childFragmentManager.beginTransaction()
-                .replace(R.id.AddexpenseFramelayout, IncomeFragment())
+                .add(
+                    R.id.AddexpenseFramelayout,
+                    incomeFragment,
+                    "INCOME"
+                )
                 .commit()
-            binding.AddexpenseBottomNav.selectedItemId = R.id.IncomeMenu
         }
+
+
+        if (expenseFragment == null) {
+            expenseFragment = ExpenseFragment()
+
+            childFragmentManager.beginTransaction()
+                .add(
+                    R.id.AddexpenseFramelayout,
+                    expenseFragment,
+                    "EXPENSE"
+                )
+                .hide(expenseFragment)
+                .commit()
+        }
+
+
+        binding.AddexpenseBottomNav.selectedItemId = R.id.IncomeMenu
+
 
         binding.AddexpenseBottomNav.setOnItemSelectedListener { item ->
 
-            var selectedFragment: Fragment? = null
+            val currentIncomeFragment =
+                childFragmentManager.findFragmentByTag("INCOME")
+
+            val currentExpenseFragment =
+                childFragmentManager.findFragmentByTag("EXPENSE")
+
 
             when (item.itemId) {
-                R.id.IncomeMenu -> {
-                    selectedFragment = IncomeFragment()
-                }
-                R.id.ExpenseMenu -> {
-                    selectedFragment = ExpenseFragment()
-                }
-            }
 
-            if (selectedFragment != null) {
-                childFragmentManager.beginTransaction()
-                    .replace(R.id.AddexpenseFramelayout, selectedFragment)
-                    .commit()
+                R.id.IncomeMenu -> {
+
+                    childFragmentManager.beginTransaction()
+                        .apply {
+
+                            currentIncomeFragment?.let {
+                                show(it)
+                            }
+
+                            currentExpenseFragment?.let {
+                                hide(it)
+                            }
+
+                        }
+                        .commit()
+
+                    true
+                }
+
+
+                R.id.ExpenseMenu -> {
+
+                    childFragmentManager.beginTransaction()
+                        .apply {
+
+                            currentIncomeFragment?.let {
+                                hide(it)
+                            }
+
+                            currentExpenseFragment?.let {
+                                show(it)
+                            }
+
+                        }
+                        .commit()
+
+                    true
+                }
+
+
+                else -> false
             }
-            true
         }
     }
 }

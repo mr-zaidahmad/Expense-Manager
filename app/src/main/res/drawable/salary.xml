@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+  <!-- Circular background -->
+  <path
+      android:pathData="M480,880
+            C259,880 80,701 80,480
+            C80,259 259,80 480,80
+            C701,80 880,259 880,480
+            C880,701 701,880 480,880Z"
+      android:fillColor="#F9A825" />
+
+  <!-- Currency / Money icon -->
+  <group
+      android:scaleX="0.62"
+      android:scaleY="0.62"
+      android:translateX="182"
+      android:translateY="182">
+
+    <path
+        android:pathData="M600,840q-118,0 -210,-67T260,600L120,600v-80h122q-3,-24 -2.5,-44.5T242,440L120,440v-80h140q38,-106 130,-173t210,-67q69,0 130.5,24.5T840,212l-57,56q-37,-32 -83.5,-50T600,200q-85,0 -152,44.5T347,360h253v80L323,440q-4,27 -3,47.5t3,32.5h277v80L347,600q34,71 101,115.5T600,760q53,0 99.5,-18t83.5,-50l57,56q-48,43 -109.5,67.5T600,840Z"
+        android:fillColor="#FFFFFF" />
+
+  </group>
+
+</vector>

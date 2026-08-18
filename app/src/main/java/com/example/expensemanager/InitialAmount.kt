@@ -1,5 +1,6 @@
 package com.example.expensemanager
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,58 +28,134 @@ class InitialAmount : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentInitialAmountBinding.inflate(inflater, container, false)
+        binding = FragmentInitialAmountBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+
         super.onViewCreated(view, savedInstanceState)
 
-        database = Roomdatabase_UserDatabase.getDatabase(requireContext())
+        database =
+            Roomdatabase_UserDatabase.getDatabase(
+                requireContext()
+            )
 
-        accountName = arguments?.getString("ACCOUNT_NAME")
-        currency = arguments?.getString("CURRENCY")
+        accountName =
+            arguments?.getString("ACCOUNT_NAME")
 
-        // Push content up when the keyboard opens, back down when it closes
+        currency =
+            arguments?.getString("CURRENCY")
+
+
+        // Push content up when keyboard opens
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val imeHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
-            v.setPadding(20, 20, 20, imeHeight)
+
+            val imeHeight =
+                insets.getInsets(
+                    WindowInsetsCompat.Type.ime()
+                ).bottom
+
+            v.setPadding(
+                20,
+                20,
+                20,
+                imeHeight
+            )
+
             insets
         }
 
+
+        // DONE BUTTON
         binding.btnDone.setOnClickListener {
 
-            val amountText = binding.EditTextAmount.text.toString().trim()
+            val amountText =
+                binding.EditTextAmount
+                    .text
+                    .toString()
+                    .trim()
 
             val amount =
-                if (amountText.isEmpty()) 0
-                else amountText.toInt()
+                if (amountText.isEmpty()) {
+                    0
+                } else {
+                    amountText.toInt()
+                }
 
             saveAccount(amount)
         }
 
+
+        // SKIP BUTTON
         binding.tvSkip.setOnClickListener {
+
             saveAccount(0)
         }
     }
 
+
     private fun saveAccount(amount: Int) {
 
-        val name = accountName ?: return
-        val selectedCurrency = currency ?: return
+        val name =
+            accountName ?: return
 
-        val user = RoomdatabaseUserdata(
-            name = name,
-            Currency = selectedCurrency,
-            InitialAmount = amount
-        )
+        val selectedCurrency =
+            currency ?: return
+
+
+        // Create a NEW account object
+        val user =
+            RoomdatabaseUserdata(
+                name = name,
+                Currency = selectedCurrency,
+                InitialAmount = amount
+            )
+
+
         lifecycleScope.launch {
 
-            database.userDAO().InsertuserData(user)
+            // Save this account to Room
+            database.userDAO()
+                .InsertuserData(user)
 
-            Toast.makeText(requireContext(), "Saved Successfully", Toast.LENGTH_SHORT).show()
 
-            findNavController().popBackStack(R.id.HomeContainerFragment, false)
+            // Make the newly created account
+            // the currently selected account
+            requireActivity()
+                .getSharedPreferences(
+                    "ExpenseManager",
+                    Context.MODE_PRIVATE
+                )
+                .edit()
+                .putString(
+                    "SELECTED_ACCOUNT",
+                    name
+                )
+                .apply()
+
+
+            Toast.makeText(
+                requireContext(),
+                "Saved Successfully",
+                Toast.LENGTH_SHORT
+            ).show()
+
+
+            // Go back to Home
+            findNavController()
+                .popBackStack(
+                    R.id.HomeContainerFragment,
+                    false
+                )
         }
     }
 }

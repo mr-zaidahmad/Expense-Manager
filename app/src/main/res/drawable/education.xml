@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+  <!-- Circular background -->
+  <path
+      android:pathData="M480,880
+            C259,880 80,701 80,480
+            C80,259 259,80 480,80
+            C701,80 880,259 880,480
+            C880,701 701,880 480,880Z"
+      android:fillColor="#00A6A6" />
+
+  <!-- Education icon -->
+  <group
+      android:scaleX="0.62"
+      android:scaleY="0.62"
+      android:translateX="182"
+      android:translateY="182">
+
+    <path
+        android:pathData="M480,840 L200,688v-240L40,360l440,-240 440,240v320h-80v-276l-80,44v240L480,840ZM480,508 L754,360 480,212 206,360 480,508ZM480,749 L680,641v-151L480,600 280,490v151l200,108ZM480,508ZM480,598ZM480,598Z"
+        android:fillColor="#FFFFFF" />
+
+  </group>
+
+</vector>

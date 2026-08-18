@@ -49,11 +49,8 @@
         android:label="fragment_add_expense2"
         tools:layout="@layout/fragment_add_expense" >
         <action
-            android:id="@+id/action_addExpense_to_incomeFragment"
-            app:destination="@id/incomeFragment" />
-        <action
-            android:id="@+id/action_addExpense_to_expenseFragment"
-            app:destination="@id/expenseFragment" />
+            android:id="@+id/action_addExpense_to_categories"
+            app:destination="@id/categories" />
     </fragment>
     <fragment
         android:id="@+id/incomeFragment"
@@ -70,5 +67,27 @@
         android:name="com.example.expensemanager.StatisticsFragment"
         android:label="fragment_statistics2"
         tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/categories"
+        android:name="com.example.expensemanager.Categories"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categories_to_incomeCategory"
+            app:destination="@id/incomeCategory" />
+        <action
+            android:id="@+id/action_categories_to_expenseCategory"
+            app:destination="@id/expenseCategory" />
+    </fragment>
+    <fragment
+        android:id="@+id/incomeCategory"
+        android:name="com.example.expensemanager.IncomeCategory"
+        android:label="fragment_income_category"
+        tools:layout="@layout/fragment_income_category" />
+    <fragment
+        android:id="@+id/expenseCategory"
+        android:name="com.example.expensemanager.ExpenseCategory"
+        android:label="fragment_expense_category"
+        tools:layout="@layout/fragment_expense_category" />
 
 </navigation>

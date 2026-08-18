@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+  <!-- Circular background -->
+  <path
+      android:pathData="M480,880
+            C259,880 80,701 80,480
+            C80,259 259,80 480,80
+            C701,80 880,259 880,480
+            C880,701 701,880 480,880Z"
+      android:fillColor="#EF3D3D" />
+
+  <!-- Health icon -->
+  <group
+      android:scaleX="0.62"
+      android:scaleY="0.62"
+      android:translateX="182"
+      android:translateY="182">
+
+    <path
+        android:pathData="M320,840v-200L120,640v-320h200v-200h320v200h200v320L640,640v200L320,840ZM400,760h160v-200h200v-160L560,400v-200L400,200v200L200,400v160h200v200ZM480,480Z"
+        android:fillColor="#FFFFFF" />
+
+  </group>
+
+</vector>

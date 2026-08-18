@@ -6,16 +6,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".IncomeFragment">
 
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/labelDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/light_blue"
+        android:background="@drawable/button_border"
+        />
+
+    <TextView
+        android:id="@+id/labelDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Date"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSelectedDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/labelDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/AmountIncome"/>
+
+
     <EditText
-        android:layout_marginTop="50dp"
         android:id="@+id/AmountIncome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="192dp"
         android:hint="Amount"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:layout_marginTop="50dp"
@@ -30,28 +75,46 @@
 
     <EditText
         android:layout_marginTop="50dp"
-        android:id="@+id/SelectCategoryIncome"
+        android:id="@+id/WalletIncome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select Category"
+        android:hint="Wallet"
         app:layout_constraintTop_toBottomOf="@+id/DescriptionIncome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.1"/>
 
-    <EditText
-        android:layout_marginTop="50dp"
-        android:id="@+id/WalletIncome"
+
+    <LinearLayout
+        android:id="@+id/categoryContainerIncome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Wallet"
-        app:layout_constraintTop_toBottomOf="@+id/SelectCategoryIncome"
+        android:layout_height="72dp"
+        android:background="@drawable/bg_input"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/WalletIncome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"/>
+        android:layout_marginTop="30dp">
 
+        <TextView
+            android:id="@+id/categoryText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Category"
+            android:textColor="#222222"
+            android:textSize="20sp" />
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/drop_downsvg" />
 
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+  <!-- Circular background -->
+  <path
+      android:pathData="M480,880
+            C259,880 80,701 80,480
+            C80,259 259,80 480,80
+            C701,80 880,259 880,480
+            C880,701 701,880 480,880Z"
+      android:fillColor="#1976D2" />
+
+  <!-- Wallet icon, scaled down to fit inside circle -->
+  <group
+      android:scaleX="0.62"
+      android:scaleY="0.62"
+      android:translateX="182"
+      android:translateY="182">
+
+    <path
+        android:pathData="M240,800q-66,0 -113,-47T80,640v-320q0,-66 47,-113t113,-47h480q66,0 113,47t47,113v320q0,66 -47,113t-113,47L240,800ZM240,320h480q22,0 42,5t38,16v-21q0,-33 -23.5,-56.5T720,240L240,240q-33,0 -56.5,23.5T160,320v21q18,-11 38,-16t42,-5ZM166,450 L611,558q9,2 18,0t17,-8l139,-116q-11,-15 -28,-24.5t-37,-9.5L240,400q-26,0 -45.5,13.5T166,450Z"
+        android:fillColor="#FFFFFF" />
+
+  </group>
+
+</vector>

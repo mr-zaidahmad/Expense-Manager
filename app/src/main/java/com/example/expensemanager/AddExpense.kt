@@ -25,6 +25,8 @@ class AddExpense : Fragment() {
 
         binding.AddexpenseBottomNav.itemIconTintList = null
 
+
+
         if (savedInstanceState == null) {
             childFragmentManager.beginTransaction()
                 .replace(R.id.AddexpenseFramelayout, IncomeFragment())

@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+  <!-- Circular background -->
+  <path
+      android:pathData="M480,880
+            C259,880 80,701 80,480
+            C80,259 259,80 480,80
+            C701,80 880,259 880,480
+            C880,701 701,880 480,880Z"
+      android:fillColor="#FFC400" />
+
+  <!-- Food icon -->
+  <group
+      android:scaleX="0.62"
+      android:scaleY="0.62"
+      android:translateX="182"
+      android:translateY="182">
+
+    <path
+        android:pathData="M240,880v-366q-54,-14 -87,-57t-33,-97v-280h80v240h40v-240h80v240h40v-240h80v280q0,54 -33,97t-87,57v366h-80ZM640,880v-381q-54,-18 -87,-75.5T520,293q0,-89 47,-151t113,-62q66,0 113,62.5T840,294q0,73 -33,130t-87,75v381h-80Z"
+        android:fillColor="#FFFFFF" />
+
+  </group>
+
+</vector>

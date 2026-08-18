@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+  <!-- Circular background -->
+  <path
+      android:pathData="M480,880
+            C259,880 80,701 80,480
+            C80,259 259,80 480,80
+            C701,80 880,259 880,480
+            C880,701 701,880 480,880Z"
+      android:fillColor="#26A69A" />
+
+  <!-- Ideas / Lightbulb icon -->
+  <group
+      android:scaleX="0.62"
+      android:scaleY="0.62"
+      android:translateX="182"
+      android:translateY="182">
+
+    <path
+        android:pathData="M480,880q-26,0 -47,-12.5T400,834q-33,0 -56.5,-23.5T320,754v-142q-59,-39 -94.5,-103T190,370q0,-121 84.5,-205.5T480,80q121,0 205.5,84.5T770,370q0,77 -35.5,140T640,612v142q0,33 -23.5,56.5T560,834q-12,21 -33,33.5T480,880ZM400,754h160v-36L400,718v36ZM400,678h160v-38L400,640v38ZM392,560h58v-108l-88,-88 42,-42 76,76 76,-76 42,42 -88,88v108h58q54,-26 88,-76.5T690,370q0,-88 -61,-149t-149,-61q-88,0 -149,61t-61,149q0,63 34,113.5t88,76.5ZM480,398ZM480,360Z"
+        android:fillColor="#FFFFFF" />
+
+  </group>
+
+</vector>

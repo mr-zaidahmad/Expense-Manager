@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+  <!-- Circular background -->
+  <path
+      android:pathData="M480,880
+            C259,880 80,701 80,480
+            C80,259 259,80 480,80
+            C701,80 880,259 880,480
+            C880,701 701,880 480,880Z"
+      android:fillColor="#3949AB" />
+
+  <!-- Bank / Finance icon -->
+  <group
+      android:scaleX="0.62"
+      android:scaleY="0.62"
+      android:translateX="182"
+      android:translateY="182">
+
+    <path
+        android:pathData="M200,680v-280h80v280h-80ZM440,680v-280h80v280h-80ZM80,840v-80h800v80L80,840ZM680,680v-280h80v280h-80ZM80,320v-80l400,-200 400,200v80L80,320ZM258,240h444,-444ZM258,240h444L480,130 258,240Z"
+        android:fillColor="#FFFFFF" />
+
+  </group>
+
+</vector>

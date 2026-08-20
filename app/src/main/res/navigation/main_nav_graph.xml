@@ -19,6 +19,15 @@
         <action
             android:id="@+id/action_HomeContainerFragment_to_statisticsFragment"
             app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_HomeContainerFragment_to_settingAccount"
+            app:destination="@id/settingAccount" />
+        <action
+            android:id="@+id/action_HomeContainerFragment_to_settingCategory"
+            app:destination="@id/settingCategory" />
+        <action
+            android:id="@+id/action_HomeContainerFragment_to_settingLanguage"
+            app:destination="@id/settingLanguage" />
     </fragment>
     <fragment
         android:id="@+id/addAccount"
@@ -89,5 +98,34 @@
         android:name="com.example.expensemanager.ExpenseCategory"
         android:label="fragment_expense_category"
         tools:layout="@layout/fragment_expense_category" />
+    <fragment
+        android:id="@+id/settingAccount"
+        android:name="com.example.expensemanager.SettingAccount"
+        android:label="fragment_setting_account"
+        tools:layout="@layout/fragment_setting_account" >
+        <action
+            android:id="@+id/action_settingAccount_to_addAccount"
+            app:destination="@id/addAccount" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingCategory"
+        android:name="com.example.expensemanager.settingCategory"
+        android:label="fragment_setting_category"
+        tools:layout="@layout/fragment_setting_category" />
+    <fragment
+        android:id="@+id/settingLanguage"
+        android:name="com.example.expensemanager.SettingLanguage"
+        android:label="fragment_setting_language"
+        tools:layout="@layout/fragment_setting_language" />
+    <fragment
+        android:id="@+id/settingIncome"
+        android:name="com.example.expensemanager.SettingIncome"
+        android:label="fragment_setting_income"
+        tools:layout="@layout/fragment_setting_income" />
+    <fragment
+        android:id="@+id/settingExpense"
+        android:name="com.example.expensemanager.settingExpense"
+        android:label="fragment_setting_expense"
+        tools:layout="@layout/fragment_setting_expense" />
 
 </navigation>

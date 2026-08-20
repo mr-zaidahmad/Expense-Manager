@@ -102,10 +102,7 @@ class TranscationFragment : Fragment() {
                         selectedAccountName
                     )
 
-            android.util.Log.d(
-                "ACCOUNT_DEBUG",
-                "Account: ${account?.name}, InitialAmount: ${account?.InitialAmount}"
-            )
+
 
 
             // Account not found
@@ -245,6 +242,9 @@ class TranscationFragment : Fragment() {
                 }
         }
     }
+
+
+
 
 
     // =========================================

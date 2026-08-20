@@ -26,6 +26,17 @@ class IncomeCategory : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val preferences = requireContext().getSharedPreferences(
+            "ExpenseManager",
+            android.content.Context.MODE_PRIVATE
+        )
+
+        val deletedCategories = preferences.getStringSet(
+            "DELETED_INCOME_CATEGORIES",
+            emptySet()
+        ) ?: emptySet()
+
+
         binding.allowanceContainer.setOnClickListener {
 
             requireParentFragment()

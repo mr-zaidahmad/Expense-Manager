@@ -11,58 +11,89 @@
     android:paddingEnd="20dp"
     android:paddingBottom="14dp">
 
+
+    <!-- Category Icon -->
+
     <ImageView
-        android:id="@+id/TransactionIcon"
+        android:id="@+id/SettingTransactionIcon"
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <!-- Category -->
+
     <TextView
-        android:id="@+id/TransactionCategory"
+        android:id="@+id/SettingTransactionCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
-        android:text="Furniture"
+        android:text="Food"
         android:textColor="@color/text_primary"
         android:textSize="17sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/TransactionIcon"
-        app:layout_constraintTop_toTopOf="@id/TransactionIcon"
-        app:layout_constraintEnd_toStartOf="@id/TransactionAmount" />
+        app:layout_constraintStart_toEndOf="@id/SettingTransactionIcon"
+        app:layout_constraintTop_toTopOf="@id/SettingTransactionIcon"
+        app:layout_constraintEnd_toStartOf="@id/SettingTransactionAmount" />
+
+
+    <!-- Wallet -->
 
     <TextView
-        android:id="@+id/TransactionWallet"
+        android:id="@+id/SettingTransactionWallet"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Cash"
         android:textColor="@color/text_secondary"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@id/TransactionCategory"
-        app:layout_constraintTop_toBottomOf="@id/TransactionCategory"
-        app:layout_constraintEnd_toStartOf="@id/TransactionAmount" />
+        app:layout_constraintStart_toStartOf="@id/SettingTransactionCategory"
+        app:layout_constraintTop_toBottomOf="@id/SettingTransactionCategory"
+        app:layout_constraintEnd_toStartOf="@id/SettingTransactionAmount" />
+
+
+    <!-- Amount -->
 
     <TextView
-        android:id="@+id/TransactionAmount"
+        android:id="@+id/SettingTransactionAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="-Rs. 1,000"
         android:textColor="@color/expense_red"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/TransactionIcon" />
+        app:layout_constraintTop_toTopOf="@id/SettingTransactionIcon" />
+
+
+    <!-- Date -->
 
     <TextView
-        android:id="@+id/TransactionDate"
+        android:id="@+id/SettingTransactionDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="2:43 pm"
         android:textColor="@color/text_secondary"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/SettingTransactionAmount"
+        app:layout_constraintTop_toBottomOf="@id/SettingTransactionAmount" />
+
+
+    <!-- Delete -->
+
+    <ImageView
+        android:id="@+id/SettingTransactionDelete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/delete"
+        android:scaleType="centerInside"
+        android:contentDescription="Delete transaction"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TransactionAmount" />
+        app:layout_constraintTop_toBottomOf="@id/SettingTransactionDate"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

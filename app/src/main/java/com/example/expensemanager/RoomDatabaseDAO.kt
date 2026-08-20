@@ -12,14 +12,24 @@ import androidx.room.Query
 
 @Dao
 interface RoomDatabaseDAO {
-  @Insert
-  suspend fun InsertuserData(user : RoomdatabaseUserdata)
 
-  @Query("SELECT *FROM Account")
+  @Insert
+  suspend fun InsertuserData(user: RoomdatabaseUserdata)
+
+  @Query("SELECT * FROM Account")
   fun getAllAccount(): LiveData<List<RoomdatabaseUserdata>>
 
   @Query("SELECT * FROM Account WHERE name = :name LIMIT 1")
   suspend fun getAccountByName(name: String): RoomdatabaseUserdata?
 
+  @Query("UPDATE Account SET name = :newName WHERE id = :accountId")
+  suspend fun updateAccountName(
+    accountId: Int,
+    newName: String
+  )
 
+  @Query("DELETE FROM Account WHERE id = :accountId")
+  suspend fun deleteAccount(
+    accountId: Int
+  )
 }

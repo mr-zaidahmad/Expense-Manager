@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:title="Managment"
@@ -12,19 +13,10 @@
     <item
         android:id="@+id/AccountDrawer"
         android:title="Account"/>
-    <item
-        android:id="@+id/CurrencyDrawer"
-        android:title="Currency"/>
+
     <item
         android:id="@+id/CategoryDrawer"
-        android:title="Category"/>
-    <item
-        android:id="@+id/BudgetDrawer"
-        android:title="Budget"/>
-    <item
-        android:id="@+id/GoalDrawer"
-        android:title="Goal"/>
-
+        android:title="Delete Category"/>
  </group>
     <item
         android:title="Configration"
@@ -34,7 +26,9 @@
         android:id="@+id/group2">
         <item
             android:id="@+id/ThemeMode"
-            android:title="Theme"/>
+            android:title=""
+            app:actionLayout="@layout/item_drawer_theme" />
+
         <item
             android:id="@+id/language"
             android:title="Language"/>

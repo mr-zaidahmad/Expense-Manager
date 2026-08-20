@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -27,161 +29,449 @@ class HomeContainerFragment : Fragment() {
     private lateinit var toolbar: Toolbar
 
     private lateinit var database: Roomdatabase_UserDatabase
-
     private lateinit var preferences: SharedPreferences
 
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeContainerBinding.inflate(inflater, container, false)
+
+        _binding = FragmentHomeContainerBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+
+        super.onViewCreated(
+            view,
+            savedInstanceState
+        )
 
         binding.BottomNav.itemIconTintList = null
 
-        database = Roomdatabase_UserDatabase.getDatabase(requireContext())
+        database =
+            Roomdatabase_UserDatabase.getDatabase(
+                requireContext()
+            )
 
-        preferences = requireActivity().getSharedPreferences("ExpenseManager", AppCompatActivity.MODE_PRIVATE)
+        preferences =
+            requireActivity().getSharedPreferences(
+                "ExpenseManager",
+                AppCompatActivity.MODE_PRIVATE
+            )
+
+
+        childFragmentManager.addOnBackStackChangedListener {
+
+            if (childFragmentManager.backStackEntryCount == 0) {
+
+                binding.BottomNav.visibility =
+                    View.VISIBLE
+            }
+        }
+
 
         binding.ToolbarAccount.text =
-            preferences.getString("SELECTED_ACCOUNT", "Account")
+            preferences.getString(
+                "SELECTED_ACCOUNT",
+                "Account"
+            )
+
 
         setupToolbar()
 
+        updateThemeDrawerText()
+
+
         if (savedInstanceState == null) {
-            loadFragment(TranscationFragment())
-            binding.transactionToolbar.visibility = View.VISIBLE
+
+            loadFragment(
+                TranscationFragment()
+            )
+
+            binding.transactionToolbar.visibility =
+                View.VISIBLE
         }
+
+
+        // =========================================
+        // BOTTOM NAVIGATION
+        // =========================================
 
         binding.BottomNav.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
 
                 R.id.nav_transcation -> {
-                    loadFragment(TranscationFragment())
-                    binding.transactionToolbar.visibility = View.VISIBLE
+
+                    loadFragment(
+                        TranscationFragment()
+                    )
+
+                    binding.transactionToolbar.visibility =
+                        View.VISIBLE
                 }
 
+
                 R.id.nav_addExpense -> {
-                    findNavController().navigate(R.id.action_HomeContainerFragment_to_addExpense)
+
+                    findNavController().navigate(
+                        R.id.action_HomeContainerFragment_to_addExpense
+                    )
+
                     return@setOnItemSelectedListener false
                 }
 
+
                 R.id.nav_statictics -> {
-                    loadFragment(StatisticsFragment())
-                    binding.transactionToolbar.visibility = View.GONE
+
+                    loadFragment(
+                        StatisticsFragment()
+                    )
+
+                    binding.transactionToolbar.visibility =
+                        View.GONE
                 }
             }
 
             true
         }
+
+
+        // =========================================
+        // DRAWER MENU
+        // =========================================
 
         binding.NavigationMenu.setNavigationItemSelectedListener {
 
             when (it.itemId) {
 
-                R.id.AccountDrawer ->
-                    Toast.makeText(requireContext(), "Account", Toast.LENGTH_SHORT).show()
+                R.id.AccountDrawer -> {
 
-                R.id.CurrencyDrawer ->
-                    Toast.makeText(requireContext(), "Currency", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(
+                        R.id.action_HomeContainerFragment_to_settingAccount
+                    )
+                }
 
-                R.id.CategoryDrawer ->
-                    Toast.makeText(requireContext(), "Category", Toast.LENGTH_SHORT).show()
 
-                R.id.BudgetDrawer ->
-                    Toast.makeText(requireContext(), "Budget", Toast.LENGTH_SHORT).show()
+                R.id.CategoryDrawer -> {
 
-                R.id.GoalDrawer ->
-                    Toast.makeText(requireContext(), "Goal", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(
+                        R.id.action_HomeContainerFragment_to_settingCategory
+                    )
+                }
 
-                R.id.ThemeMode ->
-                    Toast.makeText(requireContext(), "Theme", Toast.LENGTH_SHORT).show()
 
-                R.id.language ->
-                    Toast.makeText(requireContext(), "Language", Toast.LENGTH_SHORT).show()
+                R.id.ThemeMode -> {
+
+                    showThemeDialog()
+                }
+
+
+                R.id.language -> {
+
+                    findNavController().navigate(
+                        R.id.action_HomeContainerFragment_to_settingLanguage
+                    )
+                }
             }
 
-            drawerLayout.closeDrawer(GravityCompat.START)
+
+            drawerLayout.closeDrawer(
+                GravityCompat.START
+            )
 
             true
         }
     }
 
+
+    // =========================================
+    // TOOLBAR
+    // =========================================
+
     private fun setupToolbar() {
 
-        drawerLayout = binding.Drawerlayout
-        toolbar = binding.transactionToolbar
+        drawerLayout =
+            binding.Drawerlayout
 
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar =
+            binding.transactionToolbar
 
-        toolbar.setNavigationIcon(R.drawable.setting)
+
+        (requireActivity() as AppCompatActivity)
+            .setSupportActionBar(toolbar)
+
+
+        (requireActivity() as AppCompatActivity)
+            .supportActionBar
+            ?.setDisplayShowTitleEnabled(false)
+
+
+        toolbar.setNavigationIcon(
+            R.drawable.setting
+        )
+
 
         toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
+
+            drawerLayout.openDrawer(
+                GravityCompat.START
+            )
         }
 
+
         binding.ToolbarAccount.setOnClickListener {
+
             showBottomSheet()
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
+
+    // =========================================
+    // LOAD FRAGMENT
+    // =========================================
+
+    private fun loadFragment(
+        fragment: Fragment
+    ) {
 
         childFragmentManager.beginTransaction()
-            .replace(R.id.FragmentsframeLayout, fragment)
+            .replace(
+                R.id.FragmentsframeLayout,
+                fragment
+            )
             .commit()
     }
 
+
+    // =========================================
+    // ACCOUNT BOTTOM SHEET
+    // =========================================
+
     private fun showBottomSheet() {
 
-        val dialog = BottomSheetDialog(requireContext())
+        val dialog =
+            BottomSheetDialog(
+                requireContext()
+            )
 
-        val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rvAccounts)
+        val view =
+            layoutInflater.inflate(
+                R.layout.bottom_sheet_layout,
+                null
+            )
 
-        val adapter = AccountAdapter(emptyList()) { account ->
 
-            // Save selected account
-            preferences.edit()
-                .putString("SELECTED_ACCOUNT", account.name)
-                .apply()
+        val recyclerView =
+            view.findViewById<RecyclerView>(
+                R.id.rvAccounts
+            )
 
-            // Change account name in toolbar
-            binding.ToolbarAccount.text = account.name
 
-            // Reload transaction screen so it loads
-            // the selected account's data
-            loadFragment(TranscationFragment())
+        val adapter =
+            AccountAdapter(
+                emptyList(),
 
-            dialog.dismiss()
-        }
+                onClick = { account ->
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
+                    preferences.edit()
+                        .putString(
+                            "SELECTED_ACCOUNT",
+                            account.name
+                        )
+                        .apply()
 
-        database.userDAO().getAllAccount().observe(viewLifecycleOwner) { accounts ->
-            adapter.updateList(accounts)
-        }
+
+                    binding.ToolbarAccount.text =
+                        account.name
+
+
+                    loadFragment(
+                        TranscationFragment()
+                    )
+
+
+                    dialog.dismiss()
+                }
+            )
+
+
+        recyclerView.layoutManager =
+            LinearLayoutManager(
+                requireContext()
+            )
+
+
+        recyclerView.adapter =
+            adapter
+
+
+        database.userDAO()
+            .getAllAccount()
+            .observe(viewLifecycleOwner) { accounts ->
+
+                adapter.updateList(
+                    accounts
+                )
+            }
+
 
         dialog.setContentView(view)
 
-        view.findViewById<LinearLayout>(R.id.AddaccountLinear).setOnClickListener {
+
+        view.findViewById<LinearLayout>(
+            R.id.AddaccountLinear
+        ).setOnClickListener {
+
             dialog.dismiss()
-            findNavController().navigate(R.id.action_HomeContainerFragment_to_addAccount)
+
+            findNavController().navigate(
+                R.id.action_HomeContainerFragment_to_addAccount
+            )
         }
+
 
         dialog.show()
     }
 
+
+    // =========================================
+    // UPDATE THEME TEXT IN DRAWER
+    // =========================================
+
+    private fun updateThemeDrawerText() {
+
+        val themeItem =
+            binding.NavigationMenu.menu.findItem(
+                R.id.ThemeMode
+            )
+
+        val actionView =
+            themeItem.actionView
+
+        val themeValue =
+            actionView?.findViewById<TextView>(
+                R.id.DrawerThemeValue
+            )
+
+        themeValue?.text =
+            ThemeManager.getThemeDisplayName(
+                requireContext()
+            )
+    }
+
+
+    // =========================================
+    // THEME DIALOG
+    // =========================================
+
+    private fun showThemeDialog() {
+
+        val currentTheme =
+            ThemeManager.getTheme(
+                requireContext()
+            )
+
+
+        var selectedTheme =
+            currentTheme
+
+
+        val themeOptions =
+            arrayOf(
+                "System default",
+                "Light",
+                "Dark"
+            )
+
+
+        val checkedItem =
+            when (currentTheme) {
+
+                ThemeManager.LIGHT -> 1
+
+                ThemeManager.DARK -> 2
+
+                else -> 0
+            }
+
+
+        val dialog =
+            AlertDialog.Builder(
+                requireContext()
+            )
+                .setTitle("Theme")
+                .setSingleChoiceItems(
+                    themeOptions,
+                    checkedItem
+                ) { _, which ->
+
+                    selectedTheme =
+                        when (which) {
+
+                            1 -> ThemeManager.LIGHT
+
+                            2 -> ThemeManager.DARK
+
+                            else -> ThemeManager.SYSTEM
+                        }
+                }
+                .setNegativeButton(
+                    "CANCEL",
+                    null
+                )
+                .setPositiveButton(
+                    "DONE",
+                    null
+                )
+                .create()
+
+
+        dialog.setOnShowListener {
+
+            dialog.getButton(
+                AlertDialog.BUTTON_POSITIVE
+            ).setOnClickListener {
+
+                ThemeManager.saveTheme(
+                    requireContext(),
+                    selectedTheme
+                )
+
+
+                updateThemeDrawerText()
+
+
+                dialog.dismiss()
+            }
+        }
+
+
+        dialog.show()
+    }
+
+
+    // =========================================
+    // CLEAN UP
+    // =========================================
+
     override fun onDestroyView() {
+
         super.onDestroyView()
+
         _binding = null
     }
 }

@@ -7,11 +7,13 @@ import com.example.expensemanager.databinding.ItemAccountBinding
 
 class AccountAdapter(
     private var accountList: List<RoomdatabaseUserdata>,
-    private val onClick: (RoomdatabaseUserdata) -> Unit
+    private val onClick: (RoomdatabaseUserdata) -> Unit,
+    private val onDeleteClick: (RoomdatabaseUserdata) -> Unit = {}
 ) : RecyclerView.Adapter<AccountAdapter.AccountViewHolder>() {
 
-    class AccountViewHolder(val binding: ItemAccountBinding)
-        : RecyclerView.ViewHolder(binding.root)
+    class AccountViewHolder(
+        val binding: ItemAccountBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,14 +37,24 @@ class AccountAdapter(
         val account = accountList[position]
 
         holder.binding.tvAccountName.text = account.name
-        holder.binding.tvCurrency.text = account.Currency
 
+        holder.binding.tvCurrency.text =
+            "${account.Currency} ${String.format("%,.0f", account.InitialAmount.toDouble())}"
+
+        // Click account to edit
         holder.itemView.setOnClickListener {
             onClick(account)
         }
+
+        // Click delete
+        holder.binding.DeleteAccountIcon.setOnClickListener {
+            onDeleteClick(account)
+        }
     }
 
-    override fun getItemCount() = accountList.size
+    override fun getItemCount(): Int {
+        return accountList.size
+    }
 
     fun updateList(newList: List<RoomdatabaseUserdata>) {
         accountList = newList

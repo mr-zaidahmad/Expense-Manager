@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="main_bg_color">#ADD8E6</color>
-    <color name="light_brown">#E0FFFF</color>
-    <color name="black">#FFFFFF</color>
-    <color name="light_blue">#24A0ED</color>
+    <!-- App background -->
+    <color name="screen_background">#121016</color>
+
+    <!-- Cards / containers -->
+    <color name="card_background">#1E1B20</color>
+
+    <!-- Main text -->
+    <color name="text_primary">#F5F5F5</color>
+
+    <!-- Secondary text -->
+    <color name="text_secondary">#B8B5BA</color>
+
+    <!-- Normal label text -->
+    <color name="text_label">#D6D3D8</color>
+
+    <!-- Dividers -->
+    <color name="divider_color">#3A373D</color>
+
+    <!-- Light gray divider -->
+    <color name="light_divider">#353238</color>
+
+    <!-- Income -->
+    <color name="income_blue">#42A5F5</color>
+
+    <!-- Expense -->
+    <color name="expense_red">#EF5350</color>
+
+    <!-- Input text -->
+    <color name="input_text">#F5F5F5</color>
+
+    <!-- Input background -->
+    <color name="input_background">#242126</color>
+
+    <!-- Button -->
+    <color name="light_blue">#2196F3</color>
+
 </resources>

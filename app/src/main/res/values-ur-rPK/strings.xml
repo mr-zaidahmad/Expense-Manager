@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Expense Manager</string>
+
+    <string name="hello_blank_fragment">خالی فریگمنٹ</string>
+    <string name="first_fragment_label">پہلا فریگمنٹ</string>
+    <string name="second_fragment_label">دوسرا فریگمنٹ</string>
+    <string name="next">اگلا</string>
+    <string name="previous">پچھلا</string>
+
+    <string name="managment">انتظام</string>
+    <string name="account">اکاؤنٹ</string>
+    <string name="delete_category">زمرہ حذف کریں</string>
+    <string name="language">زبان</string>
+    <string name="abcc">abc</string>
+    <string name="configration">ترتیبات</string>
+
+    <string name="select_currency">کرنسی منتخب کریں</string>
+    <string name="pkr">PKR</string>
+    <string name="usdt">USDT</string>
+    <string name="euro">یورو</string>
+
+    <string name="saved_successfully">کامیابی سے محفوظ ہوگیا</string>
+
+    <string name="bills">بلز</string>
+    <string name="cloth">کپڑے</string>
+    <string name="education">تعلیم</string>
+    <string name="entertainment">تفریح</string>
+    <string name="fitness">ورزش</string>
+    <string name="food">کھانا</string>
+    <string name="gifts">تحائف</string>
+    <string name="health">صحت</string>
+    <string name="furniture">فرنیچر</string>
+    <string name="pet">پالتو جانور</string>
+
+    <string name="expenseamount">خرچ کی رقم</string>
+    <string name="expensedescription">خرچ کی تفصیل</string>
+    <string name="expensewallet">خرچ کا والٹ</string>
+    <string name="selectedcategory">منتخب زمرہ</string>
+
+    <string name="enter_amount_to_continue">جاری رکھنے کے لیے رقم درج کریں</string>
+    <string name="categorytype">زمرے کی قسم</string>
+    <string name="expense">خرچ</string>
+    <string name="please_enter_a_valid_amount">براہِ کرم درست رقم درج کریں</string>
+    <string name="expensemanager">Expense Manager</string>
+
+    <string name="please_select_an_account_first">براہِ کرم پہلے ایک اکاؤنٹ منتخب کریں</string>
+    <string name="account_not_found">اکاؤنٹ نہیں ملا</string>
+    <string name="expense_saved_successfully">خرچ کامیابی سے محفوظ ہوگیا</string>
+
+    <string name="date_picker">تاریخ منتخب کریں</string>
+    <string name="select_time">وقت منتخب کریں</string>
+    <string name="time_picker">وقت منتخب کریں</string>
+    <string name="dd_mm_yyyy_hh_mm_a">dd/MM/yyyy   hh:mm a</string>
+
+    <string name="income">آمدنی</string>
+    <string name="account_name">اکاؤنٹ کا نام</string>
+    <string name="incomeamount">آمدنی کی رقم</string>
+    <string name="incomedescription">آمدنی کی تفصیل</string>
+    <string name="incomewallet">آمدنی کا والٹ</string>
+    <string name="selected_account">منتخب اکاؤنٹ</string>
+    <string name="income_saved_successfully">آمدنی کامیابی سے محفوظ ہوگئی</string>
+
+    <string name="select_date">تاریخ منتخب کریں</string>
+
+    <string name="edit_account">اکاؤنٹ میں ترمیم کریں</string>
+    <string name="cancel">منسوخ کریں</string>
+    <string name="save">محفوظ کریں</string>
+    <string name="account_name_cannot_be_empty">اکاؤنٹ کا نام خالی نہیں ہو سکتا</string>
+    <string name="account_updated">اکاؤنٹ اپ ڈیٹ ہوگیا</string>
+
+    <string name="delete_account">اکاؤنٹ حذف کریں</string>
+    <string name="are_you_sure_you_want_to_delete">کیا آپ واقعی \"%1$s\" کو حذف کرنا چاہتے ہیں؟</string>
+    <string name="delete">حذف کریں</string>
+    <string name="account_deleted">اکاؤنٹ حذف ہوگیا</string>
+
+    <string name="currency">کرنسی</string>
+    <string name="app_language">ایپ کی زبان</string>
+    <string name="en">en</string>
+    <string name="english">English</string>
+    <string name="ur">ur</string>
+    <string name="done">مکمل</string>
+
+    <string name="system_default">سسٹم ڈیفالٹ</string>
+    <string name="light">لائٹ</string>
+    <string name="dark">ڈارک</string>
+    <string name="theme">تھیم</string>
+
+    <string name="statistics_to_transactions">اعداد و شمار سے لین دین</string>
+
+    <string name="delete_transaction">لین دین حذف کریں</string>
+    <string name="are_you_sure_you_want_to_delete_this_transaction">کیا آپ واقعی اس لین دین کو حذف کرنا چاہتے ہیں؟</string>
+
+    <string name="deleted_income_categories">حذف شدہ آمدنی کے زمرے</string>
+
+    <string name="allowance">جیب خرچ</string>
+    <string name="award">انعام</string>
+    <string name="bonus">بونس</string>
+    <string name="dividend">منافع</string>
+    <string name="investment">سرمایہ کاری</string>
+    <string name="lottery">قرعہ اندازی</string>
+    <string name="salary">تنخواہ</string>
+    <string name="tips">ٹپس</string>
+    <string name="business">کاروبار</string>
+    <string name="others">دیگر</string>
+
+    <string name="add_account">اکاؤنٹ شامل کریں</string>
+    <string name="choose_your_currency">اپنی کرنسی منتخب کریں</string>
+    <string name="cash">نقد</string>
+
+    <string name="rs_1_000">-Rs. 1,000</string>
+    <string name="_2_43_pm">2:43 pm</string>
+
+    <string name="date">تاریخ</string>
+    <string name="amount">رقم</string>
+    <string name="description">تفصیل</string>
+    <string name="wallet">والٹ</string>
+    <string name="category">زمرہ</string>
+    <string name="balance">بیلنس</string>
+
+    <string name="opening_balance">ابتدائی بیلنس</string>
+    <string name="rs_0">Rs. 0</string>
+    <string name="ending_balance">اختتامی بیلنس</string>
+
+    <string name="xmlincome">آمدنی</string>
+    <string name="xmlexpense">خرچ</string>
+    <string name="_rs_0">-Rs. 0</string>
+
+    <string name="total">کل</string>
+    <string name="show_more">مزید دیکھیں</string>
+    <string name="expense_structure">خرچ کی ساخت</string>
+    <string name="overview">جائزہ</string>
+
+    <string name="i">i</string>
+    <string name="skip">چھوڑیں</string>
+
+    <string name="initial_amount">ابتدائی رقم</string>
+    <string name="how_much_money_do_you_have_in_your_cash_wallet">آپ کے نقد والٹ میں کتنی رقم موجود ہے؟</string>
+    <string name="_0">$ 0</string>
+
+    <string name="choose_a_name_for_your_account">اپنے اکاؤنٹ کے لیے نام منتخب کریں</string>
+    <string name="name">نام</string>
+
+
+    <string name="transacton">لین دین</string>
+    <string name="add_expenses">خرچ شامل کریں</string>
+    <string name="statictics">اعداد و شمار</string>
+
+</resources>

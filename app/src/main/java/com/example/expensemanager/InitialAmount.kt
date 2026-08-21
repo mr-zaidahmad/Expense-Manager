@@ -50,10 +50,10 @@ class InitialAmount : Fragment() {
             )
 
         accountName =
-            arguments?.getString("ACCOUNT_NAME")
+            arguments?.getString(getString(R.string.account_name))
 
         currency =
-            arguments?.getString("CURRENCY")
+            arguments?.getString(getString(R.string.currency))
 
 
         // Push content up when keyboard opens
@@ -132,12 +132,12 @@ class InitialAmount : Fragment() {
             // the currently selected account
             requireActivity()
                 .getSharedPreferences(
-                    "ExpenseManager",
+                    getString(R.string.expensemanager),
                     Context.MODE_PRIVATE
                 )
                 .edit()
                 .putString(
-                    "SELECTED_ACCOUNT",
+                    Constant.SELECTEDACCOUNT,
                     name
                 )
                 .apply()
@@ -145,7 +145,7 @@ class InitialAmount : Fragment() {
 
             Toast.makeText(
                 requireContext(),
-                "Saved Successfully",
+                getString(R.string.saved_successfully),
                 Toast.LENGTH_SHORT
             ).show()
 

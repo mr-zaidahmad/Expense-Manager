@@ -9,8 +9,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
+import androidx.core.os.LocaleListCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -38,11 +39,12 @@ class HomeContainerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentHomeContainerBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        _binding =
+            FragmentHomeContainerBinding.inflate(
+                inflater,
+                container,
+                false
+            )
 
         return binding.root
     }
@@ -67,10 +69,9 @@ class HomeContainerFragment : Fragment() {
 
         preferences =
             requireActivity().getSharedPreferences(
-                "ExpenseManager",
+                "expensemanager",
                 AppCompatActivity.MODE_PRIVATE
             )
-
 
         childFragmentManager.addOnBackStackChangedListener {
 
@@ -81,18 +82,15 @@ class HomeContainerFragment : Fragment() {
             }
         }
 
-
         binding.ToolbarAccount.text =
             preferences.getString(
-                "SELECTED_ACCOUNT",
+                Constant.SELECTEDACCOUNT,
                 "Account"
             )
-
 
         setupToolbar()
 
         updateThemeDrawerText()
-
 
         if (savedInstanceState == null) {
 
@@ -123,7 +121,6 @@ class HomeContainerFragment : Fragment() {
                         View.VISIBLE
                 }
 
-
                 R.id.nav_addExpense -> {
 
                     findNavController().navigate(
@@ -132,7 +129,6 @@ class HomeContainerFragment : Fragment() {
 
                     return@setOnItemSelectedListener false
                 }
-
 
                 R.id.nav_statictics -> {
 
@@ -150,7 +146,7 @@ class HomeContainerFragment : Fragment() {
 
 
         // =========================================
-        // DRAWER MENU
+        // DRAWER
         // =========================================
 
         binding.NavigationMenu.setNavigationItemSelectedListener {
@@ -164,7 +160,6 @@ class HomeContainerFragment : Fragment() {
                     )
                 }
 
-
                 R.id.CategoryDrawer -> {
 
                     findNavController().navigate(
@@ -172,21 +167,16 @@ class HomeContainerFragment : Fragment() {
                     )
                 }
 
-
                 R.id.ThemeMode -> {
 
                     showThemeDialog()
                 }
 
-
                 R.id.language -> {
 
-                    findNavController().navigate(
-                        R.id.action_HomeContainerFragment_to_settingLanguage
-                    )
+                    showLanguageDialog()
                 }
             }
-
 
             drawerLayout.closeDrawer(
                 GravityCompat.START
@@ -194,6 +184,90 @@ class HomeContainerFragment : Fragment() {
 
             true
         }
+    }
+
+
+    // =========================================
+    // LANGUAGE
+    // =========================================
+
+    private fun showLanguageDialog() {
+
+        val currentLanguage =
+            preferences.getString(
+                Constant.APPLANGUAGUES,
+                "en"
+            )
+
+        var selectedLanguage =
+            currentLanguage
+
+        val languageOptions =
+            arrayOf(
+                getString(R.string.english),
+                "اردو"
+            )
+
+        val checkedItem =
+            when (currentLanguage) {
+
+                getString(R.string.ur) -> 1
+
+                else -> 0
+            }
+
+        val dialog =
+            AlertDialog.Builder(
+                requireContext()
+            )
+                .setTitle("language")
+                .setSingleChoiceItems(
+                    languageOptions,
+                    checkedItem
+                ) { _, which ->
+
+                    selectedLanguage =
+                        when (which) {
+
+                            1 -> "ur"
+
+                            else -> "en"
+                        }
+                }
+                .setNegativeButton(
+                    getString(R.string.cancel),
+                    null
+                )
+                .setPositiveButton(
+                    getString(R.string.done),
+                    null
+                )
+                .create()
+
+        dialog.setOnShowListener {
+
+            dialog.getButton(
+                AlertDialog.BUTTON_POSITIVE
+            ).setOnClickListener {
+
+                preferences.edit()
+                    .putString(
+                        Constant.APPLANGUAGUES,
+                        selectedLanguage
+                    )
+                    .apply()
+
+                AppCompatDelegate.setApplicationLocales(
+                    LocaleListCompat.forLanguageTags(
+                        selectedLanguage
+                    )
+                )
+
+                dialog.dismiss()
+            }
+        }
+
+        dialog.show()
     }
 
 
@@ -209,20 +283,16 @@ class HomeContainerFragment : Fragment() {
         toolbar =
             binding.transactionToolbar
 
-
         (requireActivity() as AppCompatActivity)
             .setSupportActionBar(toolbar)
-
 
         (requireActivity() as AppCompatActivity)
             .supportActionBar
             ?.setDisplayShowTitleEnabled(false)
 
-
         toolbar.setNavigationIcon(
             R.drawable.setting
         )
-
 
         toolbar.setNavigationOnClickListener {
 
@@ -230,7 +300,6 @@ class HomeContainerFragment : Fragment() {
                 GravityCompat.START
             )
         }
-
 
         binding.ToolbarAccount.setOnClickListener {
 
@@ -267,19 +336,22 @@ class HomeContainerFragment : Fragment() {
                 requireContext()
             )
 
-
         val view =
             layoutInflater.inflate(
                 R.layout.bottom_sheet_layout,
                 null
             )
 
-
         val recyclerView =
             view.findViewById<RecyclerView>(
                 R.id.rvAccounts
             )
 
+
+        // =========================================
+        // ACCOUNT ADAPTER
+        // DELETE BUTTON IS HIDDEN HERE
+        // =========================================
 
         val adapter =
             AccountAdapter(
@@ -289,23 +361,22 @@ class HomeContainerFragment : Fragment() {
 
                     preferences.edit()
                         .putString(
-                            "SELECTED_ACCOUNT",
+                            Constant.SELECTEDACCOUNT,
                             account.name
                         )
                         .apply()
 
-
                     binding.ToolbarAccount.text =
                         account.name
-
 
                     loadFragment(
                         TranscationFragment()
                     )
 
-
                     dialog.dismiss()
-                }
+                },
+
+                showDeleteButton = false
             )
 
 
@@ -314,10 +385,13 @@ class HomeContainerFragment : Fragment() {
                 requireContext()
             )
 
-
         recyclerView.adapter =
             adapter
 
+
+        // =========================================
+        // LOAD ACCOUNTS
+        // =========================================
 
         database.userDAO()
             .getAllAccount()
@@ -332,6 +406,10 @@ class HomeContainerFragment : Fragment() {
         dialog.setContentView(view)
 
 
+        // =========================================
+        // ADD ACCOUNT
+        // =========================================
+
         view.findViewById<LinearLayout>(
             R.id.AddaccountLinear
         ).setOnClickListener {
@@ -343,13 +421,12 @@ class HomeContainerFragment : Fragment() {
             )
         }
 
-
         dialog.show()
     }
 
 
     // =========================================
-    // UPDATE THEME TEXT IN DRAWER
+    // THEME DRAWER TEXT
     // =========================================
 
     private fun updateThemeDrawerText() {
@@ -385,18 +462,15 @@ class HomeContainerFragment : Fragment() {
                 requireContext()
             )
 
-
         var selectedTheme =
             currentTheme
 
-
         val themeOptions =
             arrayOf(
-                "System default",
-                "Light",
-                "Dark"
+                getString(R.string.system_default),
+                getString(R.string.light),
+                getString(R.string.dark)
             )
-
 
         val checkedItem =
             when (currentTheme) {
@@ -408,12 +482,13 @@ class HomeContainerFragment : Fragment() {
                 else -> 0
             }
 
-
         val dialog =
             AlertDialog.Builder(
                 requireContext()
             )
-                .setTitle("Theme")
+                .setTitle(
+                    getString(R.string.theme)
+                )
                 .setSingleChoiceItems(
                     themeOptions,
                     checkedItem
@@ -430,15 +505,14 @@ class HomeContainerFragment : Fragment() {
                         }
                 }
                 .setNegativeButton(
-                    "CANCEL",
+                    getString(R.string.cancel),
                     null
                 )
                 .setPositiveButton(
-                    "DONE",
+                    getString(R.string.done),
                     null
                 )
                 .create()
-
 
         dialog.setOnShowListener {
 
@@ -451,21 +525,18 @@ class HomeContainerFragment : Fragment() {
                     selectedTheme
                 )
 
-
                 updateThemeDrawerText()
-
 
                 dialog.dismiss()
             }
         }
-
 
         dialog.show()
     }
 
 
     // =========================================
-    // CLEAN UP
+    // DESTROY VIEW
     // =========================================
 
     override fun onDestroyView() {

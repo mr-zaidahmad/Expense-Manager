@@ -16,7 +16,7 @@
         android:id="@+id/DrawerThemeTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Theme"
+        android:text="@string/theme"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="17sp" />
 
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="System default"
+        android:text="@string/system_default"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp" />
 

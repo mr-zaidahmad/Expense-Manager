@@ -8,34 +8,34 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.expensemanager.databinding.FragmentIncomeCategoryBinding
 
-
 class IncomeCategory : Fragment() {
 
     private lateinit var binding: FragmentIncomeCategoryBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentIncomeCategoryBinding.inflate(inflater, container, false)
+        binding = FragmentIncomeCategoryBinding.inflate(
+            inflater,
+            container,
+            false
+        )
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
 
-        val preferences = requireContext().getSharedPreferences(
-            "ExpenseManager",
-            android.content.Context.MODE_PRIVATE
+        super.onViewCreated(
+            view,
+            savedInstanceState
         )
-
-        val deletedCategories = preferences.getStringSet(
-            "DELETED_INCOME_CATEGORIES",
-            emptySet()
-        ) ?: emptySet()
-
 
         binding.allowanceContainer.setOnClickListener {
 
@@ -43,12 +43,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Allowance")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.allowance)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.AwardContainer.setOnClickListener {
 
@@ -56,12 +60,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Award")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.award)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.BonusContainer.setOnClickListener {
 
@@ -69,12 +77,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Bonus")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.bonus)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.DividendContainer.setOnClickListener {
 
@@ -82,12 +94,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Dividend")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.dividend)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.InvestmentContainer.setOnClickListener {
 
@@ -95,12 +111,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Investment")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.investment)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.lotteryContainer.setOnClickListener {
 
@@ -108,12 +128,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Lottery")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.lottery)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.salaryContainer.setOnClickListener {
 
@@ -121,12 +145,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Salary")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.salary)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.TipsContainer.setOnClickListener {
 
@@ -134,12 +162,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Tips")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.tips)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.BusinessContainer.setOnClickListener {
 
@@ -147,12 +179,16 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Business")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.business)
+                )
 
             requireParentFragment()
                 .findNavController()
                 .popBackStack()
         }
+
 
         binding.OthersContainer.setOnClickListener {
 
@@ -160,7 +196,10 @@ class IncomeCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Others")
+                ?.set(
+                    getString(R.string.selectedcategory),
+                    getString(R.string.others)
+                )
 
             requireParentFragment()
                 .findNavController()

@@ -21,26 +21,33 @@ class SettingAccount : Fragment() {
     private lateinit var database: Roomdatabase_UserDatabase
     private lateinit var adapter: AccountAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentSettingAccountBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        binding =
+            FragmentSettingAccountBinding.inflate(
+                inflater,
+                container,
+                false
+            )
 
         return binding.root
     }
+
 
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?
     ) {
-        super.onViewCreated(view, savedInstanceState)
+
+        super.onViewCreated(
+            view,
+            savedInstanceState
+        )
 
         database =
             Roomdatabase_UserDatabase.getDatabase(
@@ -51,6 +58,7 @@ class SettingAccount : Fragment() {
 
         loadAccounts()
 
+
         binding.AddAccountIcon.setOnClickListener {
 
             findNavController().navigate(
@@ -59,28 +67,51 @@ class SettingAccount : Fragment() {
         }
     }
 
+
+    // =========================================
+    // RECYCLER VIEW
+    // =========================================
+
     private fun setupRecyclerView() {
 
-        adapter = AccountAdapter(
-            emptyList(),
+        adapter =
+            AccountAdapter(
+                emptyList(),
 
-            // Account clicked
-            onClick = { account ->
-                showEditAccountDialog(account)
-            },
+                // Account clicked
+                onClick = { account ->
 
-            // Delete clicked
-            onDeleteClick = { account ->
-                showDeleteDialog(account)
-            }
-        )
+                    showEditAccountDialog(
+                        account
+                    )
+                },
+
+                // Delete clicked
+                onDeleteClick = { account ->
+
+                    showDeleteDialog(
+                        account
+                    )
+                },
+
+                // KEEP DELETE BUTTON VISIBLE
+                showDeleteButton = true
+            )
+
 
         binding.AccountRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
+            LinearLayoutManager(
+                requireContext()
+            )
 
         binding.AccountRecyclerView.adapter =
             adapter
     }
+
+
+    // =========================================
+    // LOAD ACCOUNTS
+    // =========================================
 
     private fun loadAccounts() {
 
@@ -88,22 +119,46 @@ class SettingAccount : Fragment() {
             .getAllAccount()
             .observe(viewLifecycleOwner) { accounts ->
 
-                adapter.updateList(accounts)
+                adapter.updateList(
+                    accounts
+                )
             }
     }
+
+
+    // =========================================
+    // EDIT ACCOUNT
+    // =========================================
 
     private fun showEditAccountDialog(
         account: RoomdatabaseUserdata
     ) {
 
-        val editText = EditText(requireContext())
+        val editText =
+            EditText(
+                requireContext()
+            )
 
-        editText.setText(account.name)
-        editText.setSelection(editText.text.length)
+        editText.setText(
+            account.name
+        )
 
-        val padding = (20 * resources.displayMetrics.density).toInt()
+        editText.setSelection(
+            editText.text.length
+        )
 
-        val container = android.widget.FrameLayout(requireContext())
+
+        val padding =
+            (
+                    20 *
+                            resources.displayMetrics.density
+                    ).toInt()
+
+
+        val container =
+            android.widget.FrameLayout(
+                requireContext()
+            )
 
         container.setPadding(
             padding,
@@ -112,27 +167,53 @@ class SettingAccount : Fragment() {
             0
         )
 
-        container.addView(editText)
+        container.addView(
+            editText
+        )
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("Edit Account")
-            .setView(container)
-            .setNegativeButton("Cancel", null)
-            .setPositiveButton("Save") { _, _ ->
+
+        AlertDialog.Builder(
+            requireContext()
+        )
+            .setTitle(
+                getString(
+                    R.string.edit_account
+                )
+            )
+            .setView(
+                container
+            )
+            .setNegativeButton(
+                getString(
+                    R.string.cancel
+                ),
+                null
+            )
+            .setPositiveButton(
+                getString(
+                    R.string.save
+                )
+            ) { _, _ ->
 
                 val newName =
-                    editText.text.toString().trim()
+                    editText.text
+                        .toString()
+                        .trim()
+
 
                 if (newName.isEmpty()) {
 
                     Toast.makeText(
                         requireContext(),
-                        "Account name cannot be empty",
+                        getString(
+                            R.string.account_name_cannot_be_empty
+                        ),
                         Toast.LENGTH_SHORT
                     ).show()
 
                     return@setPositiveButton
                 }
+
 
                 updateAccount(
                     account,
@@ -141,6 +222,11 @@ class SettingAccount : Fragment() {
             }
             .show()
     }
+
+
+    // =========================================
+    // UPDATE ACCOUNT
+    // =========================================
 
     private fun updateAccount(
         account: RoomdatabaseUserdata,
@@ -155,58 +241,91 @@ class SettingAccount : Fragment() {
                     newName
                 )
 
+
             val preferences =
                 requireActivity()
                     .getSharedPreferences(
-                        "ExpenseManager",
+                        getString(
+                            R.string.expensemanager
+                        ),
                         Context.MODE_PRIVATE
                     )
 
+
             val selectedAccount =
                 preferences.getString(
-                    "SELECTED_ACCOUNT",
+                    Constant.SELECTEDACCOUNT,
                     null
                 )
+
 
             if (selectedAccount == account.name) {
 
                 preferences.edit()
                     .putString(
-                        "SELECTED_ACCOUNT",
+                        Constant.SELECTEDACCOUNT,
                         newName
                     )
                     .apply()
             }
 
+
             Toast.makeText(
                 requireContext(),
-                "Account updated",
+                getString(
+                    R.string.account_updated
+                ),
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
 
+
+    // =========================================
+    // DELETE DIALOG
+    // =========================================
+
     private fun showDeleteDialog(
         account: RoomdatabaseUserdata
     ) {
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("Delete Account")
+        AlertDialog.Builder(
+            requireContext()
+        )
+            .setTitle(
+                getString(
+                    R.string.delete_account
+                )
+            )
             .setMessage(
-                "Are you sure you want to delete \"${account.name}\"?"
+                getString(
+                    R.string.are_you_sure_you_want_to_delete,
+                    account.name
+                )
             )
             .setNegativeButton(
-                "Cancel",
+                getString(
+                    R.string.cancel
+                ),
                 null
             )
             .setPositiveButton(
-                "Delete"
+                getString(
+                    R.string.delete
+                )
             ) { _, _ ->
 
-                deleteAccount(account)
+                deleteAccount(
+                    account
+                )
             }
             .show()
     }
+
+
+    // =========================================
+    // DELETE ACCOUNT
+    // =========================================
 
     private fun deleteAccount(
         account: RoomdatabaseUserdata
@@ -214,11 +333,13 @@ class SettingAccount : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            // Delete all transactions belonging to this account
+            // Delete all transactions
+            // belonging to this account
             database.transactionDAO()
                 .deleteTransactionsForAccount(
                     account.id
                 )
+
 
             // Delete the account
             database.userDAO()
@@ -226,29 +347,39 @@ class SettingAccount : Fragment() {
                     account.id
                 )
 
+
             val preferences =
                 requireActivity()
                     .getSharedPreferences(
-                        "ExpenseManager",
+                        getString(
+                            R.string.expensemanager
+                        ),
                         Context.MODE_PRIVATE
                     )
 
+
             val selectedAccount =
                 preferences.getString(
-                    "SELECTED_ACCOUNT",
+                    Constant.SELECTEDACCOUNT,
                     null
                 )
+
 
             if (selectedAccount == account.name) {
 
                 preferences.edit()
-                    .remove("SELECTED_ACCOUNT")
+                    .remove(
+                        Constant.SELECTEDACCOUNT
+                    )
                     .apply()
             }
 
+
             Toast.makeText(
                 requireContext(),
-                "Account deleted",
+                getString(
+                    R.string.account_deleted
+                ),
                 Toast.LENGTH_SHORT
             ).show()
         }

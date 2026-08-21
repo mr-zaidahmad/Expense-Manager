@@ -26,11 +26,12 @@ class SettingIncome : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentSettingIncomeBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        _binding =
+            FragmentSettingIncomeBinding.inflate(
+                inflater,
+                container,
+                false
+            )
 
         return binding.root
     }
@@ -40,7 +41,10 @@ class SettingIncome : Fragment() {
         savedInstanceState: Bundle?
     ) {
 
-        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(
+            view,
+            savedInstanceState
+        )
 
         database =
             Roomdatabase_UserDatabase.getDatabase(
@@ -58,20 +62,24 @@ class SettingIncome : Fragment() {
 
     private fun setupRecyclerView() {
 
-        adapter = SettingTransactionAdapter(
-            emptyList()
-        ) { transaction ->
+        adapter =
+            SettingTransactionAdapter(
+                emptyList()
+            ) { transaction ->
 
-            showDeleteDialog(transaction)
-        }
+                showDeleteDialog(
+                    transaction
+                )
+            }
 
         binding.SettingIncomeRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
+            LinearLayoutManager(
+                requireContext()
+            )
 
         binding.SettingIncomeRecyclerView.adapter =
             adapter
     }
-
 
     // =========================================
     // LOAD INCOME TRANSACTIONS
@@ -81,13 +89,13 @@ class SettingIncome : Fragment() {
 
         val preferences =
             requireActivity().getSharedPreferences(
-                "ExpenseManager",
+                Constant.PREFERENCESNAME,
                 Context.MODE_PRIVATE
             )
 
         val selectedAccountName =
             preferences.getString(
-                "SELECTED_ACCOUNT",
+                Constant.SELECTEDACCOUNT,
                 null
             )
 
@@ -111,11 +119,17 @@ class SettingIncome : Fragment() {
                 .getTransactionsForAccount(
                     account.id
                 )
-                .observe(viewLifecycleOwner) { transactions ->
+                .observe(
+                    viewLifecycleOwner
+                ) { transactions ->
 
                     val incomes =
                         transactions.filter {
-                            it.type == "INCOME"
+
+                            it.type ==
+                                    getString(
+                                        R.string.income
+                                    )
                         }
 
                     adapter.updateTransactions(
@@ -125,7 +139,6 @@ class SettingIncome : Fragment() {
         }
     }
 
-
     // =========================================
     // DELETE DIALOG
     // =========================================
@@ -134,17 +147,25 @@ class SettingIncome : Fragment() {
         transaction: RoomdatabaseTransaction
     ) {
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("Delete Transaction")
+        AlertDialog.Builder(
+            requireContext()
+        )
+            .setTitle(
+                getString(
+                    R.string.delete_transaction
+                )
+            )
             .setMessage(
-                "Are you sure you want to delete this transaction?"
+                getString(
+                    R.string.are_you_sure_you_want_to_delete_this_transaction
+                )
             )
             .setNegativeButton(
-                "CANCEL",
+                getString(R.string.cancel),
                 null
             )
             .setPositiveButton(
-                "DELETE"
+                getString(R.string.delete)
             ) { _, _ ->
 
                 lifecycleScope.launch {
@@ -157,7 +178,6 @@ class SettingIncome : Fragment() {
             }
             .show()
     }
-
 
     // =========================================
     // CLEAN UP

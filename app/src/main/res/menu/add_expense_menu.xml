@@ -2,12 +2,12 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="Income"
+        android:title="@string/xmlincome"
         android:id="@+id/IncomeMenu"
         android:icon="@drawable/income"
         />
     <item
-        android:title="Expense"
+        android:title="@string/xmlexpense"
         android:id="@+id/ExpenseMenu"
        android:icon="@drawable/expense"/>
 </menu>

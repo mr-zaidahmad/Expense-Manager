@@ -25,9 +25,6 @@
         <action
             android:id="@+id/action_HomeContainerFragment_to_settingCategory"
             app:destination="@id/settingCategory" />
-        <action
-            android:id="@+id/action_HomeContainerFragment_to_settingLanguage"
-            app:destination="@id/settingLanguage" />
     </fragment>
     <fragment
         android:id="@+id/addAccount"

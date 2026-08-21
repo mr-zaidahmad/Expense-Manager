@@ -60,7 +60,7 @@ class StatisticsFragment : Fragment() {
                     R.id.FragmentsframeLayout,
                     TranscationFragment()
                 )
-                .addToBackStack("statistics_to_transactions")
+                .addToBackStack(getString(R.string.statistics_to_transactions))
                 .commit()
 
             requireActivity()
@@ -85,13 +85,13 @@ class StatisticsFragment : Fragment() {
 
         val preferences =
             requireActivity().getSharedPreferences(
-                "ExpenseManager",
+                    "ExpenseManager",
                 Context.MODE_PRIVATE
             )
 
         val selectedAccountName =
             preferences.getString(
-                "SELECTED_ACCOUNT",
+       "SELCTED_ACCOUNT",
                 null
             )
 

@@ -33,12 +33,12 @@ class Categories : Fragment() {
         val categoryType =
             navController.previousBackStackEntry
                 ?.savedStateHandle
-                ?.get<String>("categoryType")
+                ?.get<String>(getString(R.string.categorytype))
 
 
         if (savedInstanceState == null) {
 
-            if (categoryType == "EXPENSE") {
+            if (categoryType == getString(R.string.expense)) {
 
                 // Open Expense Category
                 binding.CategoryDrawer.selectedItemId = R.id.CategoryExpense

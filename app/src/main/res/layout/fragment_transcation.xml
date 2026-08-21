@@ -38,7 +38,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Overview"
+                    android:text="@string/overview"
                     android:textColor="@color/text_primary"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -49,7 +49,7 @@
                     android:layout_marginStart="8dp"
                     android:background="@drawable/overview_info_circle"
                     android:gravity="center"
-                    android:text="i"
+                    android:text="@string/i"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -74,7 +74,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Income"
+                        android:text="@string/xmlincome"
                         android:textColor="@color/text_label"
                         android:textSize="16sp" />
 
@@ -83,7 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Rs. 0"
+                        android:text="@string/rs_0"
                         android:textColor="@color/income_blue"
                         android:textSize="20sp" />
 
@@ -116,7 +116,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Expense"
+                        android:text="@string/xmlexpense"
                         android:textColor="@color/text_label"
                         android:textSize="16sp" />
 
@@ -125,7 +125,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="-Rs. 0"
+                        android:text="@string/_rs_0"
                         android:textColor="@color/expense_red"
                         android:textSize="20sp" />
 
@@ -158,7 +158,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total"
+                        android:text="@string/total"
                         android:textColor="@color/text_label"
                         android:textSize="16sp" />
 
@@ -167,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Rs. 0"
+                        android:text="@string/rs_0"
                         android:textColor="@color/text_primary"
                         android:textSize="20sp" />
 

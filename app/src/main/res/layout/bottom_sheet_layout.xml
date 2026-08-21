@@ -48,7 +48,7 @@
         android:id="@+id/AddAcountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Account"
+        android:text="@string/add_account"
         android:textSize="18sp"
         android:padding="8dp"
         android:layout_marginBottom="16dp"

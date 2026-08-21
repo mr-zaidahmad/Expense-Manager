@@ -32,7 +32,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Bills")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.bills))
 
             requireParentFragment()
                 .findNavController()
@@ -45,7 +45,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Cloth")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.cloth))
 
             requireParentFragment()
                 .findNavController()
@@ -58,7 +58,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Education")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.education))
 
             requireParentFragment()
                 .findNavController()
@@ -71,7 +71,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Entertainment")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.entertainment))
 
             requireParentFragment()
                 .findNavController()
@@ -84,7 +84,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Fitness")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.fitness))
 
             requireParentFragment()
                 .findNavController()
@@ -97,7 +97,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Food")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.food))
 
             requireParentFragment()
                 .findNavController()
@@ -110,7 +110,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Gifts")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.gifts))
 
             requireParentFragment()
                 .findNavController()
@@ -123,7 +123,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Health")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.health))
 
             requireParentFragment()
                 .findNavController()
@@ -136,7 +136,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Furniture")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.furniture))
 
             requireParentFragment()
                 .findNavController()
@@ -149,7 +149,7 @@ class ExpenseCategory : Fragment() {
                 .findNavController()
                 .previousBackStackEntry
                 ?.savedStateHandle
-                ?.set("selectedCategory", "Pet")
+                ?.set(getString(R.string.selectedcategory), getString(R.string.pet))
 
             requireParentFragment()
                 .findNavController()

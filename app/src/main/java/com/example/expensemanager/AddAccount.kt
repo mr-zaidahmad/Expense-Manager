@@ -43,7 +43,7 @@ class AddAccount : Fragment() {
 
             findNavController().navigate(
                 R.id.action_addAccount_to_selectCurrency,
-                bundleOf("ACCOUNT_NAME" to accountName)
+                bundleOf(getString(R.string.account_name) to accountName)
             )
         }
     }

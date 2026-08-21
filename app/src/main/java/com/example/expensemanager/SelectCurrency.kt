@@ -32,13 +32,13 @@ class SelectCurrency : Fragment() {
 
         binding.btnNext.isEnabled = false
 
-        accountName = arguments?.getString("ACCOUNT_NAME")
+        accountName = arguments?.getString(getString(R.string.account_name))
 
         val currencyLIst = arrayOf(
-            "Select Currency",
-            "PKR",
-            "USDT",
-            "EURO"
+            getString(R.string.select_currency),
+            getString(R.string.pkr),
+            getString(R.string.usdt),
+            getString(R.string.euro)
         )
 
         val adapter = ArrayAdapter(
@@ -68,8 +68,8 @@ class SelectCurrency : Fragment() {
             findNavController().navigate(
                 R.id.action_selectCurrency_to_initialAmount,
                 bundleOf(
-                    "ACCOUNT_NAME" to accountName,
-                    "CURRENCY" to selectCurrency
+                    getString(R.string.account_name) to accountName,
+                    getString(R.string.currency) to selectCurrency
                 )
             )
         }

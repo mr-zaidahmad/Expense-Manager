@@ -2,6 +2,7 @@ package com.example.expensemanager
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,19 +68,20 @@ class TranscationFragment : Fragment() {
         // Get selected account
         val preferences =
             requireActivity().getSharedPreferences(
-                "ExpenseManager",
+                Constant.PREFERENCESNAME,
                 Context.MODE_PRIVATE
             )
 
         val selectedAccountName =
             preferences.getString(
-                "SELECTED_ACCOUNT",
+                Constant.SELECTEDACCOUNT,
                 null
             )
 
 
         // No account selected
         if (selectedAccountName == null) {
+
             return
         }
 
@@ -235,6 +237,7 @@ class TranscationFragment : Fragment() {
                     account.id
                 )
                 .observe(lifecycleOwner) { transactions ->
+
 
                     adapter.updateTransactions(
                         transactions

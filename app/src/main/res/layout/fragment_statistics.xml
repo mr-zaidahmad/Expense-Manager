@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Balance"
+                android:text="@string/balance"
                 android:textColor="@color/text_primary"
                 android:textSize="19sp"
                 android:textStyle="bold" />
@@ -47,7 +47,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Opening balance"
+                        android:text="@string/opening_balance"
                         android:textColor="@color/text_label"
                         android:textSize="14sp" />
 
@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Rs. 0"
+                        android:text="@string/rs_0"
                         android:textColor="@color/text_primary"
                         android:textSize="15sp" />
 
@@ -71,7 +71,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ending balance"
+                        android:text="@string/ending_balance"
                         android:textColor="@color/text_label"
                         android:textSize="14sp" />
 
@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Rs. 0"
+                        android:text="@string/rs_0"
                         android:textColor="@color/text_primary"
                         android:textSize="15sp" />
 
@@ -118,7 +118,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Income"
+                    android:text="@string/xmlincome"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
 
@@ -126,7 +126,7 @@
                     android:id="@+id/StatisticsIncomeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rs. 0"
+                    android:text="@string/rs_0"
                     android:textColor="@color/income_blue"
                     android:textSize="14sp" />
 
@@ -142,7 +142,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Expense"
+                    android:text="@string/xmlexpense"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
 
@@ -150,7 +150,7 @@
                     android:id="@+id/StatisticsExpenseText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-Rs. 0"
+                    android:text="@string/_rs_0"
                     android:textColor="@color/expense_red"
                     android:textSize="14sp" />
 
@@ -166,7 +166,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total"
+                    android:text="@string/total"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
 
@@ -174,7 +174,7 @@
                     android:id="@+id/StatisticsTotalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rs. 0"
+                    android:text="@string/rs_0"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp" />
 
@@ -199,7 +199,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Show more"
+                    android:text="@string/show_more"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
 
@@ -227,7 +227,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expense Structure"
+                android:text="@string/expense_structure"
                 android:textColor="@color/text_primary"
                 android:textSize="19sp"
                 android:textStyle="bold" />
@@ -272,7 +272,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Show more"
+                    android:text="@string/show_more"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
 

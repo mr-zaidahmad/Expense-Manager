@@ -26,10 +26,10 @@ class AddExpense : Fragment() {
         binding.AddexpenseBottomNav.itemIconTintList = null
 
         var incomeFragment =
-            childFragmentManager.findFragmentByTag("INCOME") as? IncomeFragment
+            childFragmentManager.findFragmentByTag(getString(R.string.income)) as? IncomeFragment
 
         var expenseFragment =
-            childFragmentManager.findFragmentByTag("EXPENSE") as? ExpenseFragment
+            childFragmentManager.findFragmentByTag(getString(R.string.expense)) as? ExpenseFragment
 
 
         if (incomeFragment == null) {
@@ -39,7 +39,7 @@ class AddExpense : Fragment() {
                 .add(
                     R.id.AddexpenseFramelayout,
                     incomeFragment,
-                    "INCOME"
+                    getString(R.string.income)
                 )
                 .commit()
         }
@@ -52,7 +52,7 @@ class AddExpense : Fragment() {
                 .add(
                     R.id.AddexpenseFramelayout,
                     expenseFragment,
-                    "EXPENSE"
+                    getString(R.string.expense)
                 )
                 .hide(expenseFragment)
                 .commit()
@@ -65,10 +65,10 @@ class AddExpense : Fragment() {
         binding.AddexpenseBottomNav.setOnItemSelectedListener { item ->
 
             val currentIncomeFragment =
-                childFragmentManager.findFragmentByTag("INCOME")
+                childFragmentManager.findFragmentByTag(getString(R.string.income))
 
             val currentExpenseFragment =
-                childFragmentManager.findFragmentByTag("EXPENSE")
+                childFragmentManager.findFragmentByTag(getString(R.string.expense))
 
 
             when (item.itemId) {

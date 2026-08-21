@@ -31,7 +31,6 @@ interface TransactionDAO {
         accountId: Int
     ): LiveData<List<RoomdatabaseTransaction>>
 
-
     // =========================================
     // TRANSACTIONS BY CATEGORY
     // =========================================
@@ -49,7 +48,6 @@ interface TransactionDAO {
         type: String
     ): LiveData<List<RoomdatabaseTransaction>>
 
-
     // =========================================
     // TOTAL INCOME
     // =========================================
@@ -64,7 +62,6 @@ interface TransactionDAO {
         accountId: Int
     ): Double
 
-
     // =========================================
     // TOTAL EXPENSE
     // =========================================
@@ -78,7 +75,6 @@ interface TransactionDAO {
     suspend fun getTotalExpense(
         accountId: Int
     ): Double
-
 
     // =========================================
     // MONTHLY INCOME
@@ -96,7 +92,6 @@ interface TransactionDAO {
         monthPattern: String
     ): Double
 
-
     // =========================================
     // MONTHLY EXPENSE
     // =========================================
@@ -112,7 +107,6 @@ interface TransactionDAO {
         accountId: Int,
         monthPattern: String
     ): Double
-
 
     // =========================================
     // EXPENSE BY CATEGORY
@@ -130,7 +124,6 @@ interface TransactionDAO {
         accountId: Int
     ): List<CategoryTotal>
 
-
     // =========================================
     // DELETE ALL TRANSACTIONS FOR ACCOUNT
     // =========================================
@@ -142,7 +135,6 @@ interface TransactionDAO {
     suspend fun deleteTransactionsForAccount(
         accountId: Int
     )
-
 
     // =========================================
     // DELETE ONE TRANSACTION

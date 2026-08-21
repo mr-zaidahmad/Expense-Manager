@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/CategoryIncome"
-        android:title="Income"
+        android:title="@string/xmlincome"
 
         />
     <item
         android:id="@+id/CategoryExpense"
-        android:title="Expense"/>
+        android:title="@string/xmlexpense"/>
 
 </menu>

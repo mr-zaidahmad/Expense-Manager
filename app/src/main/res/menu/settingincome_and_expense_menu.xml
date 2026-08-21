@@ -3,10 +3,10 @@
 
 
     <item
-        android:title="INCOME"
+        android:title="@string/income"
         android:id="@+id/SettingIncome"
         />
     <item
-        android:title="EXPENSE"
+        android:title="@string/expense"
         android:id="@+id/SettingExpense"/>
 </menu>

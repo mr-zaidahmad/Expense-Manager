@@ -1,11 +1,11 @@
 package com.example.expensemanager
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.expensemanager.databinding.FragmentIncomeBinding
@@ -17,190 +17,283 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-
 class IncomeFragment : Fragment() {
 
     private lateinit var binding: FragmentIncomeBinding
-    private lateinit var database : Roomdatabase_UserDatabase
+    private lateinit var database: Roomdatabase_UserDatabase
 
-    // Stores the date the user picked, in milliseconds (this is how Android represents dates internally)
-    // Defaults to right now, in case the user never opens the picker
-    private var selectedDateMillis: Long = System.currentTimeMillis()
+    private var selectedDateMillis: Long =
+        System.currentTimeMillis()
 
-    // Stores the hour/minute the user picked separately from the date,
-    // because MaterialDatePicker only gives you a date, not a time
     private var selectedHour: Int = 0
     private var selectedMinute: Int = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Standard View Binding setup, same as your other fragments
-        binding = FragmentIncomeBinding.inflate(inflater, container, false)
+
+        binding =
+            FragmentIncomeBinding.inflate(
+                inflater,
+                container,
+                false
+            )
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
 
-        val navController = requireParentFragment()
-            .requireParentFragment()
-            .findNavController()
+        super.onViewCreated(
+            view,
+            savedInstanceState
+        )
 
-        val savedStateHandle =
-            navController.currentBackStackEntry?.savedStateHandle
-
-        savedStateHandle?.get<String>("incomeAmount")?.let {
-            binding.AmountIncome.setText(it)
-        }
-
-        savedStateHandle?.get<String>("incomeDescription")?.let {
-            binding.DescriptionIncome.setText(it)
-        }
-
-        savedStateHandle?.get<String>("incomeWallet")?.let {
-            binding.WalletIncome.setText(it)
-        }
-
-
-       database= Roomdatabase_UserDatabase.getDatabase(requireContext())
-
-        findNavController().currentBackStackEntry
-            ?.savedStateHandle
-            ?.getLiveData<String>("selectedCategory")
-            ?.observe(viewLifecycleOwner) { category ->
-
-                binding.categoryText.text = category
-            }
-
-
-        // Get the device's current date and time as soon as the screen opens
-        val now = Calendar.getInstance()
-        selectedHour = now.get(Calendar.HOUR_OF_DAY)   // current hour (0-23 format)
-        selectedMinute = now.get(Calendar.MINUTE)       // current minute
-
-        // Show "today's date, current time" as the default text before user taps anything
-        updateDateTimeText()
-
-        // When user taps the gray date box, start the picker flow
-        binding.tvSelectedDate.setOnClickListener {
-            showDatePicker()
-        }
-        binding.categoryContainerIncome.setOnClickListener {
-
-            val navController = requireParentFragment()
+        val navController =
+            requireParentFragment()
                 .requireParentFragment()
                 .findNavController()
 
-            // Save the amount before opening the category screen
+        val savedStateHandle =
+            navController.currentBackStackEntry
+                ?.savedStateHandle
+
+        savedStateHandle
+            ?.get<String>(
+                getString(R.string.incomeamount)
+            )
+            ?.let {
+
+                binding.AmountIncome.setText(it)
+            }
+
+        savedStateHandle
+            ?.get<String>(
+                getString(R.string.incomedescription)
+            )
+            ?.let {
+
+                binding.DescriptionIncome.setText(it)
+            }
+
+        savedStateHandle
+            ?.get<String>(
+                getString(R.string.incomewallet)
+            )
+            ?.let {
+
+                binding.WalletIncome.setText(it)
+            }
+
+        database =
+            Roomdatabase_UserDatabase.getDatabase(
+                requireContext()
+            )
+
+        // =========================================
+        // RESTORE SELECTED CATEGORY
+        // =========================================
+
+        savedStateHandle
+            ?.getLiveData<String>(
+                getString(R.string.selectedcategory)
+            )
+            ?.observe(viewLifecycleOwner) { category ->
+
+                binding.categoryText.text =
+                    category
+            }
+
+        // =========================================
+        // DATE / TIME
+        // =========================================
+
+        val now =
+            Calendar.getInstance()
+
+        selectedHour =
+            now.get(Calendar.HOUR_OF_DAY)
+
+        selectedMinute =
+            now.get(Calendar.MINUTE)
+
+        updateDateTimeText()
+
+        binding.tvSelectedDate.setOnClickListener {
+            showDatePicker()
+        }
+
+        // =========================================
+        // CATEGORY
+        // =========================================
+
+        binding.categoryContainerIncome.setOnClickListener {
+
             navController.currentBackStackEntry
                 ?.savedStateHandle
                 ?.set(
-                    "incomeAmount",
+                    getString(R.string.incomeamount),
                     binding.AmountIncome.text.toString()
                 )
 
-            // Save the description before opening the category screen
             navController.currentBackStackEntry
                 ?.savedStateHandle
                 ?.set(
-                    "incomeDescription",
+                    getString(R.string.incomedescription),
                     binding.DescriptionIncome.text.toString()
                 )
 
-            // Save the wallet before opening the category screen
             navController.currentBackStackEntry
                 ?.savedStateHandle
                 ?.set(
-                    "incomeWallet",
+                    getString(R.string.incomewallet),
                     binding.WalletIncome.text.toString()
                 )
 
-            // Tell Categories that we came from Income
             navController.currentBackStackEntry
                 ?.savedStateHandle
                 ?.set(
-                    "categoryType",
-                    "INCOME"
+                    getString(R.string.categorytype),
+                    getString(R.string.income)
                 )
 
             navController.navigate(
                 R.id.action_addExpense_to_categories
             )
         }
+
+        // =========================================
+        // SAVE
+        // =========================================
+
         binding.saveButton.setOnClickListener {
+
             saveIncome()
         }
     }
 
     private fun saveIncome() {
-        val amountText=binding.AmountIncome.text.toString().trim()
-        if (amountText.isEmpty()){
-            binding.AmountIncome.error="Enter Amount to  Continue"
-         return
-        }
 
-        val amount=amountText.toDoubleOrNull()
-        if (amount==null || amount<=0){
-            binding.AmountIncome.error="Please Enter a Valid amount"
+        val amountText =
+            binding.AmountIncome
+                .text
+                .toString()
+                .trim()
+
+        if (amountText.isEmpty()) {
+
+            binding.AmountIncome.error =
+                getString(
+                    R.string.enter_amount_to_continue
+                )
+
             return
         }
 
-        val descrition= binding.DescriptionIncome.text.toString().trim()
+        val amount =
+            amountText.toDoubleOrNull()
 
-        val wallet= binding.WalletIncome.text.toString().trim()
+        if (amount == null || amount <= 0) {
 
-        val category=binding.categoryText.text.toString().trim()
+            binding.AmountIncome.error =
+                getString(
+                    R.string.please_enter_a_valid_amount
+                )
 
-        val date=binding.tvSelectedDate.text.toString().trim()
-
-
-        val preferences=requireActivity().getSharedPreferences(
-            "ExpenseManager",
-            android.content.Context.MODE_PRIVATE
-        )
-        val selettedAcountName=
-            preferences.getString(
-                "SELECTED_ACCOUNT",
-                null
-            )
-        if (selettedAcountName==null){
-            Toast.makeText(requireContext(),"Please Select an account First", Toast.LENGTH_SHORT).show()
-        return
+            return
         }
 
-        // Save everything in Room
+        val description =
+            binding.DescriptionIncome
+                .text
+                .toString()
+                .trim()
+
+        val wallet =
+            binding.WalletIncome
+                .text
+                .toString()
+                .trim()
+
+        val category =
+            binding.categoryText
+                .text
+                .toString()
+                .trim()
+
+        val date =
+            binding.tvSelectedDate
+                .text
+                .toString()
+                .trim()
+
+        // =========================================
+        // GET SELECTED ACCOUNT
+        // =========================================
+
+        val preferences =
+            requireActivity().getSharedPreferences(
+                Constant.PREFERENCESNAME,
+                android.content.Context.MODE_PRIVATE
+            )
+
+        val selectedAccountName =
+            preferences.getString(
+                Constant.SELECTEDACCOUNT,
+                null
+            )
+
+        if (selectedAccountName == null) {
+
+            Toast.makeText(
+                requireContext(),
+                getString(
+                    R.string.please_select_an_account_first
+                ),
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
 
-            // Find selected account
             val account =
                 database.userDAO()
-                    .getAccountByName(selettedAcountName)
-
+                    .getAccountByName(
+                        selectedAccountName
+                    )
 
             if (account == null) {
 
                 Toast.makeText(
                     requireContext(),
-                    "Account not found",
+                    getString(
+                        R.string.account_not_found
+                    ),
                     Toast.LENGTH_SHORT
                 ).show()
+
                 return@launch
             }
 
-
-            // Create transaction
             val transaction =
                 RoomdatabaseTransaction(
 
                     accountId = account.id,
 
-                    type = "INCOME",
+                    type = getString(
+                        R.string.income
+                    ),
 
                     amount = amount,
 
-                    description = descrition,
+                    description = description,
 
                     wallet = wallet,
 
@@ -209,82 +302,137 @@ class IncomeFragment : Fragment() {
                     date = date
                 )
 
-            // Insert transaction into database
             database.transactionDAO()
-                .insertTransaction(transaction)
-
+                .insertTransaction(
+                    transaction
+                )
 
             Toast.makeText(
                 requireContext(),
-                "Income saved successfully",
+                getString(
+                    R.string.income_saved_successfully
+                ),
                 Toast.LENGTH_SHORT
             ).show()
 
-
-            // Go back after saving
-            findNavController().popBackStack()
+            findNavController()
+                .popBackStack()
         }
-
     }
+
+    // =========================================
+    // DATE PICKER
+    // =========================================
 
     private fun showDatePicker() {
 
-        // Build a Material-style calendar date picker dialog
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setSelection(selectedDateMillis)   // pre-select whatever date was chosen before (or today, first time)
-            .setTitleText("Select Date")
-            .build()
+        val datePicker =
+            MaterialDatePicker.Builder
+                .datePicker()
+                .setSelection(
+                    selectedDateMillis
+                )
+                .setTitleText(
+                    getString(
+                        R.string.select_date
+                    )
+                )
+                .build()
 
-        // This runs ONLY when user taps "OK" on the date picker (not if they cancel)
-        datePicker.addOnPositiveButtonClickListener { millis ->
-            selectedDateMillis = millis   // save the date they picked
+        datePicker
+            .addOnPositiveButtonClickListener { millis ->
 
-            // Immediately open the time picker next, so user picks date then time in one flow
-            showTimePicker()
-        }
+                selectedDateMillis =
+                    millis
 
-        // Actually display the dialog on screen
-        // "childFragmentManager" is used because this dialog lives inside a fragment, not an activity
-        // "DATE_PICKER" is just a tag name Android uses internally to track this dialog
-        datePicker.show(childFragmentManager, "DATE_PICKER")
+                showTimePicker()
+            }
+
+        datePicker.show(
+            childFragmentManager,
+            getString(
+                R.string.date_picker
+            )
+        )
     }
+
+    // =========================================
+    // TIME PICKER
+    // =========================================
 
     private fun showTimePicker() {
 
-        // Build a Material-style clock time picker dialog
-        val timePicker = MaterialTimePicker.Builder()
-            .setTimeFormat(TimeFormat.CLOCK_12H)   // 12-hour format with AM/PM (use CLOCK_24H if you want 24-hour instead)
-            .setHour(selectedHour)      // pre-fill with previously selected hour (or current hour, first time)
-            .setMinute(selectedMinute)  // pre-fill with previously selected minute
-            .setTitleText("Select Time")
-            .build()
+        val timePicker =
+            MaterialTimePicker.Builder()
+                .setTimeFormat(
+                    TimeFormat.CLOCK_12H
+                )
+                .setHour(
+                    selectedHour
+                )
+                .setMinute(
+                    selectedMinute
+                )
+                .setTitleText(
+                    getString(
+                        R.string.select_time
+                    )
+                )
+                .build()
 
-        // This runs ONLY when user taps "OK" on the time picker
-        timePicker.addOnPositiveButtonClickListener {
-            selectedHour = timePicker.hour       // read back the hour user picked
-            selectedMinute = timePicker.minute   // read back the minute user picked
+        timePicker
+            .addOnPositiveButtonClickListener {
 
-            // Now that we have both date AND time, update the text box on screen
-            updateDateTimeText()
-        }
+                selectedHour =
+                    timePicker.hour
 
-        timePicker.show(childFragmentManager, "TIME_PICKER")
+                selectedMinute =
+                    timePicker.minute
+
+                updateDateTimeText()
+            }
+
+        timePicker.show(
+            childFragmentManager,
+            getString(
+                R.string.time_picker
+            )
+        )
     }
+
+    // =========================================
+    // DATE / TIME TEXT
+    // =========================================
 
     private fun updateDateTimeText() {
 
-        // Create a Calendar object to combine the separate date and time values into one
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = selectedDateMillis   // set the date part
+        val calendar =
+            Calendar.getInstance()
 
-        // Overwrite just the hour/minute part with what the time picker gave us
-        calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
-        calendar.set(Calendar.MINUTE, selectedMinute)
+        calendar.timeInMillis =
+            selectedDateMillis
 
-        // Define how the final text should look: e.g. "08/06/2026   03:58 PM"
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy   hh:mm a", Locale.getDefault())
+        calendar.set(
+            Calendar.HOUR_OF_DAY,
+            selectedHour
+        )
 
-        // Convert the Calendar into a formatted string and show it in the gray box
-        binding.tvSelectedDate.text = dateFormat.format(calendar.time)
+        calendar.set(
+            Calendar.MINUTE,
+            selectedMinute
+        )
+
+        val dateFormat =
+            SimpleDateFormat(
+                getString(
+                    R.string.dd_mm_yyyy_hh_mm_a
+                ),
+                Locale.getDefault()
+            )
+
+        binding.tvSelectedDate.text =
+            dateFormat.format(
+                calendar.time
+            )
     }
 }
